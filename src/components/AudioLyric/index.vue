@@ -61,10 +61,21 @@ export default {
       });
       return lyricArray;
     },
+    maxTime: function() {
+      return this.split_lyric.reduce(
+        (max, value) => (max > value.start ? max : value.start),
+        0
+      );
+    },
     currentIndex() {
       const index = this.split_lyric.findIndex(
         (v) => v.start > this.currentTime
       );
+      if (index == -1) {
+        return this.currentTime > this.maxTime
+          ? this.split_lyric.length - 1
+          : 0;
+      }
       return index - 1;
     },
   },
