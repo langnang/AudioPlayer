@@ -1,5 +1,3 @@
-import audioList from '@/data/audio';
-
 export default {
   namespaced: true,
   state: {
@@ -13,7 +11,7 @@ export default {
     },
     index: 0,
     isPlaying: false,
-    list: audioList
+    list: [],
   },
   mutations: {
     SET_INDEX(state, index) {
@@ -21,14 +19,41 @@ export default {
     },
     SET_ITEM(state, item) {
       state.item = item;
-    }
+    },
+    SET_LIST(state, list) {
+      state.list = list;
+    },
     // _(state, payload) { }
   },
   getters: {
     // _: (state, getters) => { }
   },
   actions: {
+    getAudioList({ commit }) {
+      console.log(this._vm);
+      const [start, end] = ["```json", "```"];
+      window
+        .gh_api({})
+        .issues({})
+        .info({
+          owner: "langnang",
+          repo: "AudioPlayer",
+          issue_number: 7,
+        })
+        .then((res) => {
+          console.log(res);
+          commit(
+            "SET_LIST",
+            JSON.parse(
+              res.body.substring(
+                res.body.indexOf(start) + start.length,
+                res.body.lastIndexOf(end)
+              )
+            )
+          );
+        });
+    },
     // _(context, payload) { },
     // _({state,commit,getters},payload){}
-  }
-}
+  },
+};

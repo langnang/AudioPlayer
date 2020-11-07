@@ -79,6 +79,9 @@ export default {
       currentTime: null,
     };
   },
+  created() {
+    this.$store.dispatch("audio/getAudioList");
+  },
   computed: {
     ...mapGetters(["audio_list", "audio", "isPlaying"]),
     audioList() {

@@ -1,16 +1,15 @@
 import Vue from "vue";
 import "./plugins/axios";
 import "./plugins/fontawesome";
-import "./plugins/element.js";
+import "./plugins/element";
+import "./plugins/gh-api";
+import "./plugins/vue-audio-player";
 import App from "./App.vue";
 import router from "./routes";
 import store from "./store";
-import AudioPlayer from "@langnang/vue-audio-player";
-import "@langnang/vue-audio-player/lib/vue-audio-player.css";
 
 Vue.config.productionTip = false;
 Vue.use(require("vue-wechat-title"));
-Vue.use(AudioPlayer);
 
 new Vue({
   router,
